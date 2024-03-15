@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>employees1 Table</title>
+<style>
+header {
+	background-color: #333;
+	color: #fff;
+	padding: 10px;
+	text-align: center;
+}
+
+nav {
+	background-color: #444;
+	color: #fff;
+	padding: 10px;
+	text-align: center;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+nav a {
+	color: #fff;
+	text-decoration: none;
+	margin: 0 10px;
+	padding-left: 100px;
+}
+
+#employees1Table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+#employees1Table th, #employees1Table td {
+	border: 1px solid black;
+	padding: 8px;
+	text-align: left;
+}
+
+#employees1Table th {
+	background-color: #f2f2f2;
+}
+
+button {
+	padding: 5px 10px;
+	cursor: pointer;
+	border: none;
+	background-color: #4CAF50;
+	color: white;
+}
+
+button:hover {
+	background-color: #45a049;
+}
+</style>
+</head>
+<body>
+	<header>
+		<img src="logo.png" alt="Logo" height="50">
+		<!-- Replace "logo.png" with your logo path -->
+	</header>
+	<nav>
+		<a href="homepage.html">Home</a>
+		<!-- Keep Home link on the left -->
+		<span style="flex: 1;"></span>
+		<!-- Use flexbox to push "employees1 List" to the center -->
+		<a href="employeeTable.html">employees List</a> <span
+			style="flex: 1;"></span>
+		<!-- Keep employees1 List centered -->
+		<span>Hukum Gupta - <a href="#">Logout</a></span>
+		<!-- Move Logout link to the right -->
+	</nav>
+	<h2 style="background-color: yellow;">
+		<a href="create newemploy.html"> CREATE NEW EMPLOYE</a>
+	</h2>
+	<form action="EmployeeListServlet">
+		<table id="employees1Table">
+			<thead>
+				<tr>
+					<th>Unique Id</th>
+					<th>Name</th>
+					<th>Email</th>
+					<th>Mobile No</th>
+					<th>Designation</th>
+					<th>Gender</th>
+					<th>Course</th>
+					<th>Action</th>
+					<!-- Add more columns as needed -->
+				</tr>
+			</thead>
+			<tbody id="employees1Body">
+				<!-- Data will be dynamically populated here -->
+			</tbody>
+		</table>
+	</form>
+	<script>
+    // Function to fetch data from servlet and populate the table
+    function fetchEmployeeData() {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', 'EmployeeListServlet', true);
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+           var response = JSON.parse(xhr.responseText);
+          var tableBody = document.getElementById('employees1Body');
+          tableBody.innerHTML = ''; // Clear existing data
+
+          // Loop through the data and create table rows
+          response.forEach(function(employee) {
+            var row = '<tr id="employeeRow_' + employee.EMPLOYEE_ID + '">' +
+              '<td>' + employee.EMPLOYEE_ID + '</td>' +
+              '<td>' + employee.NAME + '</td>' +
+              '<td>' + employee.EMAIL + '</td>' +
+              '<td>' + employee.MOBILE_NO + '</td>' +
+              '<td>' + employee.DESIGNATION + '</td>' +
+              '<td>' + employee.GENDER + '</td>' +
+              '<td>' + employee.COURSES + '</td>' +
+              '<td>' +
+              '<button onclick="updateEmployee(' + employee.EMPLOYEE_ID + ')">Update</button>' +
+              '<button class="delete-button" data-id="' + employee.EMPLOYEE_ID + '">Delete</button>' +
+              '</td>' +
+             '</tr>';
+            tableBody.innerHTML += row;
+          });
+          
+       // Add event listeners to delete buttons
+          var deleteButtons = document.querySelectorAll('.delete-button');
+          deleteButtons.forEach(function(button) {
+              button.addEventListener('click', function() {
+                  var employeeId = this.getAttribute('data-id');
+                  deleteEmployee(employeeId);
+              });
+          });
+      }
+  };
+  xhr.send();
+}
+
+//Function to handle employee deletion
+function deleteEmployee(employeeId) {
+  if (confirm('Are you sure you want to delete this employee?')) {
+      fetch('EmployeeListServlet?employeeId=' + employeeId, {
+          method: 'DELETE'
+      })
+      .then(response => {
+          if (!response.ok) {
+              throw new Error('Network response was not ok');
+              fetchEmployeeData();
+          }
+          return response.text();
+      })
+      .then (data => {
+			alert("data deleted sucessfully")
+          window.location.href = 'employeeTable.html'; // Refresh the table after delete
+      })
+      .catch(error => {
+          console.error('There was a problem with your fetch operation:', error);
+      });
+  }
+}
+
+//Function to handle updating an employee
+function updateEmployee(employeeId) {
+  // Redirect to an update page with employeeId as parameter
+  window.location.href = 'updateEmployee.html?employeeId=' + employeeId;
+}
+
+//Call the function to fetch data when the page loads
+fetchEmployeeData();
+    
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+

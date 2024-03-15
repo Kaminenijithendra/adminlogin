@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Dashboard</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+		}
+
+		header {
+			background-color: #333;
+			color: #fff;
+			padding: 10px;
+			text-align: center;
+		}
+
+		nav {
+			background-color: #444;
+			color: #fff;
+			padding: 10px;
+            
+			text-align: center;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		nav a {
+			color: #fff;
+			margin: 0 10px;
+			padding-left: 100px;
+            text-decoration: none;
+		}
+        h2 a {
+            text-decoration: none;
+
+        }
+
+		section {
+			padding: 20px;
+		}
+
+		.container {
+			margin: 20px auto;
+			width: 80%;
+		}
+
+		.welcome {
+			text-align: center;
+			margin-bottom: 20px;
+		}
+
+		.container1 {
+			align-items: center;
+
+		}
+	</style>
+</head>
+
+<body class="container1">
+	<header>
+		<img src="logo.png" alt="Logo" height="50"> <!-- Replace "logo.png" with your logo path -->
+	</header>
+	<nav>
+		<a href="homepage.html">Home</a> <!-- Keep Home link on the left -->
+		<span style="flex: 1;"></span> <!-- Use flexbox to push "Employee List" to the center -->
+		<a href="employeeTable.html">Employee List</a>
+		<span style="flex: 1;"></span><!-- Keep Employee List centered -->
+		<span>Hukum Gupta - <a href="#">Logout</a></span> <!-- Move Logout link to the right -->
+	</nav>
+	<h2 style="background-color: yellow;"><a href="success.html"> DashBord</a> </h2>
+	<section>
+		<div class="container">
+			<h1 class="welcome">Welcome Admin Panel</h1>
+		</div>
+	</section>
+</body>
+
+</html>

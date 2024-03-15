@@ -1,0 +1,79 @@
+@charset "UTF-8";
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+		}
+
+		header {
+			background-color: #333;
+			color: #fff;
+			padding: 10px;
+			text-align: center;
+		}
+
+		nav {
+			background-color: #444;
+			color: #fff;
+			padding: 10px;
+			text-align: center;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		nav a {
+			color: #fff;
+			text-decoration: none;
+			margin: 0 10px;
+		}
+
+		section {
+			padding: 20px;
+			background-color: green;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.container {
+			text-align: left;
+			background-color: #fff;
+			border-radius: 5px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			max-width: 400px;
+			margin: 50px auto;
+			padding: 20px;
+		}
+
+		.form-group {
+			margin-bottom: 15px;
+			display: flex;
+			align-items: center;
+		}
+
+		.form-group label {
+			margin-right: 10px;
+			min-width: 100px;
+		}
+
+		.form-group input,
+		.form-group select,
+		.form-group .gender-options,
+		.form-group .course-options {
+			flex: 1;
+		}
+
+		.gender-options label,
+		.course-options label {
+			margin-right: 10px;
+		}
+
+		form {
+			text-align: center;
+		}
+
+		button {
+			margin-top: 10px;
+			/* Add some spacing between the last input and the button */
+		}

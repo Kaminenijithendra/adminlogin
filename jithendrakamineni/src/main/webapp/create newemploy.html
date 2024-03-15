@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>create new employe</title>
+	<link rel="stylesheet" type="text/css" href="stylesheet.css">
+
+</head>
+
+<body>
+	<header>
+		<img src="logo.png" alt="Logo" height="50"> <!-- Replace "logo.png" with your logo path -->
+	</header>
+	<nav>
+		<a href="#">Home</a> <!-- Keep Home link on the left -->
+		<span style="flex: 1;"></span> <!-- Use flexbox to push "Employee List" to the center -->
+		<a href="employeeTable.html">Employee List</a>
+		<span style="flex: 1;"></span><!-- Keep Employee List centered -->
+		<span>Hukum Gupta - <a href="#">Logout</a></span> <!-- Move Logout link to the right -->
+	</nav>
+	<h2 style="background-color: yellow;">Dashboard</h2>
+	<section>
+		<div class="container">
+			<form id="employeeForm" action=" EmployeeServlet" method="post" onsubmit="return validateForm()"
+				enctype="multipart/form-data">
+				<div class="form-group">
+					<label for="EMPLOYEE_ID"> EMPLOYEE_ID:</label>
+					<input type="text" id=" EMPLOYEE_ID" name=" EMPLOYEE_ID" required>
+				</div>
+				<div class="form-group">
+					<label for="name">Name:</label>
+					<input type="text" id="name" name="Name" required>
+				</div>
+				<div class="form-group">
+					<label for="email">Email:</label>
+					<input type="email" id="email" name="Email" required>
+					<span id="emailError" style="color: red;"></span>
+				</div>
+				<div class="form-group">
+					<label for="mobileNo">Mobile No:</label>
+					<input type="text" id="mobileNo" name="MobileNo" required>
+					<span id="mobileError" style="color: red;"></span>
+				</div>
+				<div class="form-group">
+					<label for="designation">Designation:</label>
+					<select id="designation" name="Designation">
+						<option value="HR">HR</option>
+						<option value="Manager">Manager</option>
+						<option value="Sales">Sales</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="gender">Gender:</label>
+					<div class="gender-options">
+						<input type="radio" id="male" name="Gender" value="M" required>
+						<label for="male">M</label>
+						<input type="radio" id="female" name="Gender" value="F" required>
+						<label for="female">F</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="course">Course:</label>
+					<div class="course-options">
+						<input type="checkbox" id="mca" name="Course" value="MCA">
+						<label for="mca">MCA</label>
+						<input type="checkbox" id="bca" name="Course" value="BCA">
+						<label for="bca">BCA</label>
+						<input type="checkbox" id="bsc" name="Course" value="BSC">
+						<label for="bsc">BSC</label>
+					</div>
+				</div>
+				<!--  <div class="form-group">
+					<label for="photo">Photo:</label>
+					<input type="file" id="photo" name="Photo" accept=".jpg, .png" value="upload">
+				</div> -->
+				<button type="submit">Submit</button>
+			</form>
+		</div>
+	</section>
+	<script>
+		function validateForm() {
+			var email = document.getElementById("email").value;
+			var mobileNo = document.getElementById("mobileNo").value;
+
+			var emailError = document.getElementById("emailError");
+			var mobileError = document.getElementById("mobileError");
+
+			var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+			var mobileRegex = /^[0-9]+$/;
+
+			if (!emailRegex.test(email)) {
+				emailError.innerText = "Invalid email format";
+				return false;
+			} else {
+				emailError.innerText = "";
+			}
+
+			if (!mobileRegex.test(mobileNo) || mobileNo.length != 10) {
+				mobileError.innerText = "Invalid mobile number";
+				return false;
+			} else {
+				mobileError.innerText = "";
+			}
+
+			return true;
+		}
+	</script>
+</body>
+
+</html>
